@@ -1,0 +1,23 @@
+# Site estático de um arquivo só: nada para compilar, a própria pasta é a publicação.
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+# O index carrega a fonte e as imagens embutidas: cache curto, para que uma
+# correção de texto ou de preço apareça sem esperar.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=600"
+
+[[headers]]
+  for = "/og.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
